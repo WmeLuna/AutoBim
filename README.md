@@ -1,5 +1,7 @@
 # AutoBim
 
+`This exists solely to add in changes specifically towards my usage/setup`
+
 AutoBim is a simple bed tramming utility for OctoPrint using ABL. Tramming is the process of making sure your bed is as
 parallel to your printer's X axis as possible. Or, put simply:
 
@@ -56,7 +58,7 @@ I think that depends on the method, and even more on how good you are at your me
 Install via the bundled [Plugin Manager](https://docs.octoprint.org/en/master/bundledplugins/pluginmanager.html)
 or manually using this URL:
 
-    https://github.com/j-be/AutoBim/archive/master.zip
+    https://github.com/WmeLuna/AutoBim/archive/next.zip
 
 **Hint:** Keep your hands away from the printer whenever possible. This not only reduces the risk of your hand colliding
 with the knob (and thus putting it out of level again) because the printer suddenly moves. It also seems to increase
