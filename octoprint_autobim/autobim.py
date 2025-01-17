@@ -236,7 +236,7 @@ class AutobimPlugin(
 
 		self._plugin_manager.send_plugin_message(self._identifier, dict(type="started"))
 
-		self._printer.commands("M117 wait...")
+		self._printer.commands("M75 wait...")
 
 		self._printer.home(["x", "y", "z"])
 		# Move up to avoid bed collisions
@@ -261,7 +261,7 @@ class AutobimPlugin(
 
 		if self._settings.get_boolean(["first_corner_is_reference"]):
 			self._logger.info("Treating first corner as reference")
-			self._printer.commands("M117 Getting reference...")
+			self._printer.commands("M75 Getting reference...")
 
 			result = self._probe_point(self.get_probe_points()[0])
 			if not result.has_value():
@@ -270,7 +270,7 @@ class AutobimPlugin(
 			reference = result.value
 			corner_index = 1
 			correct_corners = 1
-			self._printer.commands("M117 wait...")
+			self._printer.commands("M75 wait...")
 
 		while correct_corners < len(self.get_probe_points()) and self.running:
 			corner = self.get_probe_points()[corner_index]
@@ -325,7 +325,7 @@ class AutobimPlugin(
 
 	def _abort_now(self, msg):
 		self._logger.error(msg)
-		self._printer.commands("M117 %s" % msg)
+		self._printer.commands("M75 %s" % msg)
 		self.running = False
 		for handler in self.handlers:
 			handler.abort()
@@ -353,7 +353,7 @@ class AutobimPlugin(
 			if result.has_value() or result.abort:
 				return result
 			if counter < max_tries:
-				self._printer.commands("M117 Error, retrying X%s Y%s" % point)
+				self._printer.commands("M75 Error, retrying X%s Y%s" % point)
 
 		if result and not result.has_value():
 			self._abort_now("Cannot probe X%s Y%s! Please check settings!" % point)
