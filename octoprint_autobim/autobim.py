@@ -287,17 +287,18 @@ class AutobimPlugin(
 				if abs(delta) >= threshold:
 					if multipass:
 						correct_corners = 0
-					self._printer.commands("M117 %s" % self._get_message(delta))
+					self._printer.commands("M75 %s" % self._get_message(delta))
 					if next_probe_delay:
 						time.sleep(next_probe_delay)
 				else:
-					self._printer.commands("M117 %s" % self._get_message())
+					self._printer.commands("M75 %s" % self._get_message())
 
 			correct_corners += 1
 			if next_point_delay:
 				time.sleep(next_point_delay)
 
-		self._printer.commands("M117 done")
+		self._printer.commands("M77")
+		self._printer.commands("C108")
 		self.running = False
 
 		# Custom GCode
