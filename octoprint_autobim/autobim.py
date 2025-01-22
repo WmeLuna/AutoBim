@@ -273,12 +273,15 @@ class AutobimPlugin(
 			self._printer.commands("M75 wait...")
 
 		while correct_corners < len(self.get_probe_points()) and self.running:
+			correct_percent = int((correct_corners / len(self.get_probe_points())) * 100)
+			self._printer.commands("M73 P%s" % correct_percent)
 			corner = self.get_probe_points()[corner_index]
 			corner_index = (corner_index + 1) % len(self.get_probe_points())
 
 			delta = 2 * threshold
 			while abs(delta) >= threshold and self.running:
-
+				correct_percent = int((correct_corners / len(self.get_probe_points())) * 100)
+				self._printer.commands("M73 P%s" % correct_percent)
 				z_current = self._probe_point(corner)
 				if not z_current.has_value():
 					return
@@ -294,6 +297,8 @@ class AutobimPlugin(
 					self._printer.commands("M75 %s" % self._get_message())
 
 			correct_corners += 1
+			correct_percent = int((correct_corners / len(self.get_probe_points())) * 100)
+			self._printer.commands("M73 P%s" % correct_percent)
 			if next_point_delay:
 				time.sleep(next_point_delay)
 
