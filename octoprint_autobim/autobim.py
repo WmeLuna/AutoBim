@@ -72,13 +72,15 @@ class AutobimPlugin(
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
-				type="github_release",
-				user="j-be",
+				type="github_commit",
+				user="WmeLuna",
 				repo="AutoBim",
-				current=self._plugin_version,
+				branch="next",
+				# current=self._plugin_version,
 
 				# update method: pip
-				pip="https://github.com/j-be/AutoBim/archive/{target_version}.zip"
+				pip="https://github.com/WmeLuna/AutoBim/archive/next.zip",
+    		force_reinstall = True
 			)
 		)
 
